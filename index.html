@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Garansi Toko  naruto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #hasil {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .aktif {
+            color: green;
+        }
+        .habis {
+                   color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Cek Garansi Toko</h2>
+
+    <label for="tanggalBeli">Tanggal Pembelian:</label>
+    <input type="date" id="tanggalBeli">
+
+    <button onclick="cekGaransi()">Cek Garansi</button>
+
+    <div id="hasil"></div>
+
+    <script>
+        function cekGaransi() {
+            const tanggalInput = document.getElementById("tanggalBeli").value;
+            const hasil = document.getElementById("hasil");
+
+            if (!tanggalInput) {
+                hasil.innerHTML = "Silakan pilih tanggal pembelian.";
+                hasil.className = "";
+                return;
+            }
+
+            const tanggalBeli = new Date(tanggalInput);
+            const tanggalGaransiBerakhir = new Date(tanggalBeli);
+            tanggalGaransiBerakhir.setFullYear(tanggalGaransiBerakhir.getFullYear() + 1);
+
+            const hariIni = new Date();
+
+            if (hariIni <= tanggalGaransiBerakhir) {
+                hasil.innerHTML = "✅ Masih Garansi";
+                hasil.className = "aktif";
+            } else {
+                hasil.innerHTML = "❌ Garansi Habis";
+                hasil.className = "habis";
+            }
+        }
+    </script>
+
+</body>
+</html>
